@@ -1,6 +1,6 @@
 name: "Build"
 on:
-  workflow_dispatch: ~
+  workflow_dispatch:
   push:
     paths:
       - "**.ts"
@@ -22,15 +22,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
       - name: Set-Env
-        run: npm init -f&&npm install&&npm i typescript&&npm i tsc-alias
-
+        run: |
+          npm init -y
+          npm install
+          npm install typescript tsc-alias
       - name: Build-Dev
         run: npm run build-dev
-
       - name: Build-Rel
         run: npm run build-rel
-
       - name: Build-Rel-EXE
         run: npm run build
+
+      # 新增步骤，上传构建产物为artifact
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-artifacts-path # 你需要根据实际的构建产物路径进行修改
+          path: E:\gatoht # 将这个路径替换为你的构建产物输出路径
