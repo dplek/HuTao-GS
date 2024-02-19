@@ -39,4 +39,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: build-artifacts-path # 你需要根据实际的构建产物路径进行修改
-          path: E:/gatoht # 将这个路径替换为你的构建产物输出路径
+          path: .github/ # 将这个路径替换为你的构建产物输出路径
